@@ -1,5 +1,5 @@
 package Perl6::Slurp::Interpret;
-our $VERSION = '0.10';
+our $VERSION = '0.15';
 use 5.008008;
 
 package main;   # main so that the function evalues in the caller's name space.
@@ -43,7 +43,10 @@ sub eval_slurp {
 
 sub quote_slurp {
 
-    return( '"' . &slurp( @_ ) . '"' );
+    my $slurp = &slurp( @_ );
+    $slurp =~ s/\\/\\/g;
+
+    return( '"' .  $slurp  . '"' );
 
 }
 
